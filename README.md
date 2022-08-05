@@ -13,6 +13,11 @@ I am going to develop a full stack web app with MERN stack.
 - I am going to figure out how appropriate for this task **Docker** is and what value does it bring
 - I am going to find some **hosting** to run this app not only on localhost
 
+### Used Materials
+- It was not so easy to run MongoDB locally. [This official guide](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) saved me.
+- [This Guide by Traversy Media](https://youtu.be/-0exw-9YJBo) really helped me to createfirst API version. No frendly boilerplates were found.
+- [Ukrainian translation for JS Map Object](https://webdoky.org/uk/docs/Web/JavaScript/Reference/Global_Objects/Map) by WebDoky.
+
 ### TODOs
 
 During the development I am noticing some point of growth to see what to develop next.
