@@ -1,22 +1,22 @@
-import { CreateRoom } from "./components/CreateRoom";
+import { useState } from "react";
+
+import { RoomContext } from "./contexts/roomContext";
+import { WelcomingPage } from "./components/WelcomingPage";
+import { RoomNameEntry } from "./components/RoomNameEntry";
+
+import { Room } from "./interfaces";
 import "./App.css";
 
 function App() {
+  const [room, setRoom] = useState<Room>({} as Room);
+  const isRoomAvailable = Boolean(room._id);
+
   return (
-    <div className="App">
-      <h1>Scrum poker</h1>
-      <div>
-        <h3>Join Room</h3>
-        <input type="text" id="ENTER_ROOM_ID" />
-        <div>
-          <h5>Put your Card</h5>
-          <div>here will be calrd to play</div>
-          <h5>Room Players</h5>
-          <table>here will be table of players & theirs cards</table>
-        </div>
+    <RoomContext.Provider value={{ room, setRoom }}>
+      <div className="App">
+        {isRoomAvailable ? <RoomNameEntry /> : <WelcomingPage />}
       </div>
-      <CreateRoom />
-    </div>
+    </RoomContext.Provider>
   );
 }
 

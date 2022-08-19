@@ -17,6 +17,8 @@ I am going to develop a full stack web app with MERN stack.
 - It was not so easy to run MongoDB locally. [This official guide](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) saved me.
 - [This Guide by Traversy Media](https://youtu.be/-0exw-9YJBo) really helped me to createfirst API version. No frendly boilerplates were found.
 - [Ukrainian translation for JS Map Object](https://webdoky.org/uk/docs/Web/JavaScript/Reference/Global_Objects/Map) by WebDoky.
+- [Font Inter](https://fonts.google.com/specimen/Inter)
+- Made markup with Figma [here](https://www.figma.com/file/f0S8IDvbsENzKoQHbGr9L0/Explain-it?node-id=409%3A348)
 
 ### TODOs
 
@@ -31,7 +33,8 @@ During the development I am noticing some point of growth to see what to develop
 | TD-5 | **Delpoy on Docker**                      |
 | TD-6 | Find mention of TD-6 in the codebase      |
 | TD-7 | make 1 repo with joint node_modules       |
-| TD-8 | TBA                                       |
+| TD-8 | add font Inter                            |
+| TD-9 | TBA                                       |
 
 ### How to run
 
