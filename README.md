@@ -30,7 +30,8 @@ During the development I am noticing some point of growth to see what to develop
 | TD-4 | Add tests                                 |
 | TD-5 | **Delpoy on Docker**                      |
 | TD-6 | Find mention of TD-6 in the codebase      |
-| TD-7 | TBA                                       |
+| TD-7 | make 1 repo with joint node_modules       |
+| TD-8 | TBA                                       |
 
 ### How to run
 
