@@ -19,5 +19,27 @@ const addUserToRoom = async (
   return data;
 };
 
-const api = { createRoom, addUserToRoom };
+const getRoom = async (roomId: Room["_id"]): Promise<RoomResponse> => {
+  const options = { method: "GET" };
+  const response = await fetch(`${API_URI}/room/${roomId}`, options);
+  const data = await response.json();
+  return data;
+};
+
+const userChangeEstimate = async (
+  roomId: Room["_id"],
+  name: string,
+  estimate: string
+): Promise<undefined> => {
+  const options = { method: "PUT" };
+  const qs = `name=${name}&estimate=${estimate}`;
+  const response = await fetch(
+    `${API_URI}/room/${roomId}/user/estimate?${qs}`,
+    options
+  );
+  const data = await response.json();
+  return data;
+};
+
+const api = { createRoom, addUserToRoom, getRoom, userChangeEstimate };
 export default api;

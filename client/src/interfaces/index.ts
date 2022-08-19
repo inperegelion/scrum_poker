@@ -11,5 +11,6 @@ export interface Room {
 }
 export interface User {
   name: string;
+  estimate?: string;
   _id: string;
 }
