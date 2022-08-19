@@ -47,13 +47,17 @@ const removeUserFromRoom = asyncHandler(async (req, res) => {
   const { roomId } = req.params;
   const room = await Room.findById(roomId);
 
-  room.users.delete(name);
+  if (!room.users.has(name)) {
+    res.status(404).json({ message: `no such user ${name} in room ${roomId}` });
+  } else {
+    room.users.delete(name);
 
-  await Room.findByIdAndUpdate(roomId, {
-    users: room.users,
-  });
+    await Room.findByIdAndUpdate(roomId, {
+      users: room.users,
+    });
 
-  res.json({ message: `User ${name} has been removed from the room` });
+    res.json({ message: `User ${name} has been removed from the room` });
+  }
 });
 
 // @route PUT /api/room/:roomId/user/estimate?estimate=estimate&name=name
