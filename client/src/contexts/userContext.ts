@@ -1,8 +1,7 @@
 import React, { Dispatch } from "react";
-import { User } from "../interfaces";
 
 interface IUsernameContext {
-  name: User;
+  name: string;
   setName: Dispatch<React.SetStateAction<string>>;
 }
 

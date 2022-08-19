@@ -1,10 +1,15 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
-import { RoomContext } from "../../contexts/roomContext";
+import { ChangeEvent, FC, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { UsernameContext } from "../../contexts/userContext";
 import { ProceedToGameButton } from "../ProceedToGameButton";
 
 export const RoomNameEntry: FC = () => {
-  const [name, setName] = useState<string>("");
-  const { room } = useContext(RoomContext);
+  const navigate = useNavigate();
+
+  const { name, setName } = useContext(UsernameContext);
+  const { roomId } = useParams();
+
+  if (!roomId) navigate("/");
 
   function onNameInputChange(event: ChangeEvent<HTMLInputElement>) {
     const nameDraft = event.currentTarget.value;
@@ -15,16 +20,22 @@ export const RoomNameEntry: FC = () => {
     <div>
       <h1>Scrum Poker</h1>
       <p>
-        Your Room ID: <code>{room._id}</code>
+        Your Room ID: <code>{roomId}</code>
       </p>
       <p>Enter your name to play</p>
-      <input
-        type="text"
-        placeholder="Nick"
-        value={name}
-        onChange={onNameInputChange}
+      <p>
+        <input
+          type="text"
+          placeholder="Nick"
+          value={name}
+          onChange={onNameInputChange}
+        />
+      </p>
+      <ProceedToGameButton
+        roomId={roomId || ""}
+        name={name}
+        callback={() => navigate(`/room/${roomId}`)}
       />
-      <ProceedToGameButton roomId={room._id} name={name} />
     </div>
   );
 };
