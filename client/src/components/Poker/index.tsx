@@ -41,7 +41,6 @@ export const Poker: FC = () => {
         Your Name: <code>{name}</code>
       </p>
       <EstimateCards />
-      <button onClick={refreshRoomData}>🔄</button>
       <ul>
         {room?.users &&
           Object.values(room.users).map((user) => (
