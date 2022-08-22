@@ -24,19 +24,20 @@ I am going to develop a full stack web app with MERN stack.
 
 During the development I am noticing some point of growth to see what to develop next.
 
-| ID    | Description                               |
-| ----- | ----------------------------------------- |
-| TD-1  | find BP for API routing structure         |
-| TD-2  | BP for mongo documents like my Room.Users |
-| TD-3  | Translate to TS                           |
-| TD-4  | Add tests                                 |
-| TD-5  | **Delpoy on Docker**                      |
-| TD-6  | Find mention of TD-6 in the codebase      |
-| TD-7  | make 1 repo with joint node_modules       |
-| TD-8  | add font Inter                            |
-| TD-9  | use polling api connection                |
-| TD-10 | use state management system (Mobx)        |
-| TD-11 | apply Figma styles                        |
+| ID    | Days  | Description                               |
+| ----- | :---: | ----------------------------------------- |
+| TD-1  |   1   | find BP for API routing structure         |
+| TD-2  |   ½   | BP for mongo documents like my Room.Users |
+| TD-3  |   ½   | Translate to TS                           |
+| TD-4  |   1   | Add tests                                 |
+| TD-5  |   1   | **Delpoy on Docker**                      |
+| TD-6  |   ¼   | Find mention of TD-6 in the codebase      |
+| TD-7  |   ¼   | make 1 repo with joint node_modules       |
+| TD-8  |   ¼   | add font Inter                            |
+| TD-9  |   ½   | apply **React-query** poll api            |
+| TD-10 |   ½   | use state management system (**Mobx**)    |
+| TD-11 |   ¼   | apply Figma styles                        |
+| TD-12 |   ¼   | **Deploy on web hosting**                 |
 
 ### How to run
 
