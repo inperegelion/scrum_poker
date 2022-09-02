@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { FC, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
@@ -6,12 +7,25 @@ import { RoomContext } from "../../contexts/roomContext";
 export const CreateRoomButton: FC = () => {
   const { setRoom } = useContext(RoomContext);
   const navigate = useNavigate();
+  const { isLoading, isError, mutate } = useMutation(api.createRoom, {
+    onSuccess(response) {
+      setRoom(response.room);
+      navigate(`room/${response.room._id}/name`);
+    },
+  });
 
-  const handleCreateRoom = async () => {
-    const response = await api.createRoom();
-    setRoom(response.room);
-    navigate(`room/${response.room._id}/name`);
-  };
-
-  return <button onClick={handleCreateRoom}>Create a Room</button>;
+  return (
+    <>
+      <button onClick={() => mutate()} disabled={isLoading}>
+        Create a Room
+      </button>
+      {isError ? (
+        <p style={{ color: "white", backgroundColor: "red" }}>
+          Something went wrong, can't create room.
+          <br />
+          Open console to see the details.
+        </p>
+      ) : null}
+    </>
+  );
 };
