@@ -7,7 +7,7 @@ Welcome to my personal learning & self-development project. Here I'm going to de
 I am going to develop a full stack web app with MERN stack.
 
 - To display **User Interface** I am going to use React.
-- To **serve API** I am going to use Express, but in future I'd move to [Metarhia](https://metarhia.com/).
+- To **serve API** I am going to use Express, and figure out how to apply Swagger.
 - To **store data** I am going to use Mongo.
 - To **compose** this all togather I am going to use Docker
 - I am going to figure out how appropriate for this task **Docker** is and what value does it bring
