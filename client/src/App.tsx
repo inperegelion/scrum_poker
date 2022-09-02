@@ -29,8 +29,8 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<WelcomingPage />} />
-                <Route path="room/:roomId" element={<Poker />} />
                 <Route path="room/:roomId/name" element={<RoomNameEntry />} />
+                <Route path="room/:roomId" element={<Poker />} />
               </Routes>
             </BrowserRouter>
           </div>

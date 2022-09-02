@@ -24,8 +24,6 @@ export const Poker: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, roomId]);
 
-  console.log(room.users);
-
   return (
     <div>
       <h1>

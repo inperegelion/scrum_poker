@@ -1,8 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { FC, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 import api from "../../api";
 import { RoomContext } from "../../contexts/roomContext";
+
+import { ErrorMessage } from "../ErrorMessage";
 
 export const CreateRoomButton: FC = () => {
   const { setRoom } = useContext(RoomContext);
@@ -19,13 +22,7 @@ export const CreateRoomButton: FC = () => {
       <button onClick={() => mutate()} disabled={isLoading}>
         Create a Room
       </button>
-      {isError ? (
-        <p style={{ color: "white", backgroundColor: "red" }}>
-          Something went wrong, can't create room.
-          <br />
-          Open console to see the details.
-        </p>
-      ) : null}
+      {isError ? <ErrorMessage /> : null}
     </>
   );
 };
