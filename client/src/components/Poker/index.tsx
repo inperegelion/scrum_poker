@@ -19,7 +19,7 @@ export const Poker: FC = () => {
   } = useQuery(
     ["room", roomId],
     () => api.getRoom(roomId).then((resp) => resp.room),
-    { refetchInterval: 1_000 }
+    { refetchInterval: 5_000 }
   );
 
   useEffect(() => {
@@ -42,6 +42,7 @@ export const Poker: FC = () => {
             Your Name: <code>{name}</code>
           </p>
           <EstimateCards />
+          {/* todo: make it table */}
           <ul>
             {room?.users &&
               Object.values(room.users).map((user) => (
