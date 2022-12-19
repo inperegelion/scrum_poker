@@ -1,5 +1,5 @@
 import { RoomModel, UserModel } from '../models/roomModel';
-import { IRoomDocument } from '../types';
+import { IRoomDocument, IUserDocument } from '../types';
 
 export class RoomsDB {
     public static async create(): Promise<IRoomDocument> {
@@ -10,28 +10,32 @@ export class RoomsDB {
     public static async joinUser(
         id: string,
         userName: string
-    ): Promise<IRoomDocument> {
+    ): Promise<{ createdUser: IUserDocument }> {
         const room = await RoomModel.findById(id);
         const joinedUser = await UserModel.create({ name: userName });
 
         const updateResponse = await RoomModel.findByIdAndUpdate(id, {
             users: [...room.users, joinedUser],
         });
-        console.log('🛍️', { joinedUser, updateResponse });
-
-        return {} as IRoomDocument;
+        if (updateResponse) return { createdUser: joinedUser };
+        return null;
     }
 
     public static async get(id: string): Promise<IRoomDocument> {
         const room = await RoomModel.findById(id);
-        return room;
+        const populatedRooms = await room.populate('users');
+        return populatedRooms;
     }
 
     public static async userChangeEstimate(
-        id: string,
         userId: string,
         userEstimate: number
-    ): Promise<IRoomDocument> {
-        return {} as IRoomDocument;
+    ): Promise<IUserDocument> {
+        const user = await UserModel.findByIdAndUpdate(
+            userId,
+            { estimate: userEstimate },
+            { new: true }
+        );
+        return user;
     }
 }

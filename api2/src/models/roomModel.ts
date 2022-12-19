@@ -7,10 +7,7 @@ const userSchema = new Schema<IUserDocument>({
 });
 
 const roomSchema = new Schema<IRoomDocument>(
-    {
-        users: [userSchema],
-        // users: [{ type: Types.ObjectId, ref: 'User' }],
-    },
+    { users: [{ type: Types.ObjectId, ref: 'User' }] },
     { timestamps: true }
 );
 

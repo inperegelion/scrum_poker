@@ -1,7 +1,11 @@
 import { RequestHandler } from 'express';
 
 import { RoomsDB } from '../db/rooms';
-import { IRoomAttributes, IRoomCreationAttributes } from '../types';
+import {
+    IRoomAttributes,
+    IRoomCreationAttributes,
+    IUserDocument,
+} from '../types';
 
 type GetRoomHandler = RequestHandler<{ roomId: string }, IRoomAttributes>;
 const getRoom: GetRoomHandler = async (req, res) => {
@@ -23,7 +27,7 @@ const createRoom: CreateRoomHandler = async (req, res) => {
 
 type userJoinRoomHandler = RequestHandler<
     { roomId: string },
-    IRoomAttributes,
+    { createdUser: IUserDocument },
     { userName: string }
 >;
 const userJoinRoom: userJoinRoomHandler = async (req, res) => {
@@ -33,17 +37,18 @@ const userJoinRoom: userJoinRoomHandler = async (req, res) => {
 };
 
 type UserChangeEstimateHandler = RequestHandler<
-    { roomId: string; userId: string; estmate: number },
-    IRoomAttributes
+    { roomId: string; userId: string },
+    IUserDocument,
+    null,
+    { estimate: number }
 >;
 const userChangeEstimate: UserChangeEstimateHandler = async (req, res) => {
-    const room = await RoomsDB.userChangeEstimate(
-        req.params.roomId,
+    const user = await RoomsDB.userChangeEstimate(
         req.params.userId,
-        req.params.estmate
+        req.query.estimate
     );
-    if (!room) res.sendStatus(404);
-    else res.json(room);
+    if (!user) res.sendStatus(404);
+    else res.json(user);
 };
 
 const roomControllers = {
