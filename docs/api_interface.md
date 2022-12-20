@@ -4,26 +4,22 @@
 
 ## Models
 
----
-
-#### Room
+Room:
 
 ```ts
 interface Room {
-    id: string;
-    users: User[];
+  _id: string;
+  users: User[];
 }
 ```
 
----
-
-#### User
+User:
 
 ```ts
 interface User {
-    id: string;
-    name: string;
-    estimate: number;
+  _id: string;
+  name: string;
+  estimate: number;
 }
 ```
 
@@ -33,135 +29,86 @@ interface User {
 
 ---
 
-### `/room`
-
-#### Route
-
-`POST /` Create new Room
-
-##### Request
+#### `POST /rooms/` Create new Room
 
 ```ts
+// Request
 fetch(`${API_URI}/`{
     method:"POST",
 })
 
-```
-
-##### Response
-
-```json
+// Response:
 {
-    "body": {
-        "room": {
-            "id": "id",
-            "users": []
-        }
-    }
+	"users": [],
+	"_id": "63a1ec70026641a754c71609",
+	"createdAt": "2022-12-20T17:10:08.090Z",
+	"updatedAt": "2022-12-20T17:10:08.090Z",
 }
 ```
 
 ---
 
-##### Route
-
-`POST /id` User Joins the room
-
-##### Request
+#### `POST /rooms/:roomId` User Joins the room
 
 ```ts
+// Request
 fetch(`${API_URI}/${"roomId"}`{
     method:"POST",
     body: {
         name: "userName"
     }
 })
-
-```
-
-##### Response
-
-```json
+// Response
 {
-    "body": {
-        "room": {
-            "id": "roomId",
-            "users": [
-                {
-                    "id": "userId",
-                    "name": "userName",
-                    "estimate": null
-                }
-            ]
-        }
-    }
+	"createdUser": {
+		"name": "Rodrigo",
+		"_id": "63a1eedf026641a754c7160f",
+	}
 }
 ```
 
 ---
 
-##### Route
-
-`GET /id` Gets Data about state of the Room
-
-##### Request
+#### `GET /rooms/:roomId` Gets Data about state of the Room
 
 ```ts
-fetch(`${API_URI}/${"roomId"}`{
+// Request
+fetch(`${API_URI}/${roomId}`{
     method:"GET",
 })
-
-```
-
-##### Response
-
-```json
+// Response
 {
-    "body": {
-        "room": {
-            "id": "id",
-            "users": [
-                {
-                    "id": "userId",
-                    "name": "userName",
-                    "estimate": 8
-                }
-            ]
-        }
-    }
+	"_id": "63a06b6fa690245a405032bc",
+	"users": [
+		{
+			"_id": "63a06b79a690245a405032c0",
+			"name": "oleg",
+			"estimate": 5
+		},
+		{
+			"_id": "63a06c24bbb03299b62666ca",
+			"name": "Tanya",
+			"estimate": 3
+		}
+	],
+	"createdAt": "2022-12-19T13:47:27.019Z",
+	"updatedAt": "2022-12-19T13:50:28.420Z",
 }
 ```
 
 ---
 
-##### Route
-
-`PUT /id` User Changes their estimate
-
-##### Request
+#### `PUT rooms/:roomId/users/:userId?estimate=estimate` User Changes their estimate
 
 ```ts
-fetch(`${API_URI}/${'roomId'}`, {
-    method: 'PUT',
-    body: { name: 'userName', estimate: 4 },
+// Request
+fetch(`${API_URI}/${roomId}/users/${userId}?estimate=${estimate}`, {
+  method: "PUT",
 });
-```
-
-##### Response
-
-```json
+// Response
 {
-    "body": {
-        "room": {
-            "id": "id",
-            "users": [
-                {
-                    "id": "userId",
-                    "name": "userName",
-                    "estimate": 8
-                }
-            ]
-        }
-    }
+	"_id": "63a06c24bbb03299b62666ca",
+	"name": "Tanya",
+	"estimate": 3
 }
 ```
