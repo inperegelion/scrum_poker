@@ -1,12 +1,15 @@
-import React, { Dispatch } from "react";
+import { createContext, Dispatch } from "react";
+import { IUser, IRoom } from "../interfaces";
 
-interface IUsernameContext {
-  name: string;
-  setName: Dispatch<React.SetStateAction<string>>;
+interface IAppContext {
+  username: string;
+  setUsername: Dispatch<React.SetStateAction<string>>;
+  userId: IUser["_id"];
+  setUserId: Dispatch<React.SetStateAction<string>>;
+  roomId: IRoom["_id"];
+  setRoomId: Dispatch<React.SetStateAction<string>>;
 }
 
-const initialUsernameContext = {} as IUsernameContext;
+const initialAppContext = {} as IAppContext;
 
-export const UsernameContext = React.createContext<IUsernameContext>(
-  initialUsernameContext
-);
+export const AppContext = createContext<IAppContext>(initialAppContext);

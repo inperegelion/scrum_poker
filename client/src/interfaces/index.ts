@@ -1,16 +1,13 @@
-export interface RoomResponse {
-  room: Room;
-}
-export interface Room {
+import { IRoomDocument, IUserDocument } from "../../../api/src/types";
+
+export interface IRoom extends Omit<IRoomDocument, "_id" | "users"> {
   _id: string;
-  createdAt: string;
-  updatedAt: string;
-  users: {
-    [key: string]: User;
-  };
+  users: IUser[];
 }
-export interface User {
-  name: string;
-  estimate?: string;
+export interface IUser extends Omit<IUserDocument, "_id"> {
   _id: string;
+}
+
+export interface ICreateUserResponse {
+  createdUser: IUser;
 }

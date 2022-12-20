@@ -1,7 +1,6 @@
-import { FC } from "react";
-import { CreateRoomButton } from "../CreateRoomButton";
+import { CreateRoomButton } from "./CreateRoomButton";
 
-export const WelcomingPage: FC = () => {
+export const Greeting = (): JSX.Element => {
   return (
     <div>
       <h1>Welcome to the Scrum Poker</h1>

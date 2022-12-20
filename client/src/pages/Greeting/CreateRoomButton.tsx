@@ -1,16 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
-import { FC } from "react";
+import { useContext } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import api from "../../api";
+import { ErrorMessage } from "../../components/ErrorMessage";
+import { AppContext } from "../../contexts/userContext";
 
-import { ErrorMessage } from "../ErrorMessage";
-
-export const CreateRoomButton: FC = () => {
+export const CreateRoomButton = (): JSX.Element => {
   const navigate = useNavigate();
+  const { setRoomId } = useContext(AppContext);
+
   const { isLoading, isError, mutate } = useMutation(api.createRoom, {
-    onSuccess(response) {
-      navigate(`room/${response.room._id}/name`);
+    onSuccess(room) {
+      setRoomId(room._id);
+      navigate(`/${room._id}`);
     },
   });
 
@@ -19,7 +23,7 @@ export const CreateRoomButton: FC = () => {
       <button onClick={() => mutate()} disabled={isLoading}>
         Create a Room
       </button>
-      {isError ? <ErrorMessage /> : null}
+      <ErrorMessage isError={isError} />
     </>
   );
 };
