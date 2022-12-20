@@ -1,7 +1,7 @@
 import { Document, Model, Types } from 'mongoose';
 
 export interface IRoomAttributes {
-    users: Map<string, IUserAttributes>;
+    users: IUserDocument[];
 }
 
 export interface IRoomCreationAttributes {}
@@ -16,5 +16,7 @@ export interface IRoomDocument
         Document<Types.ObjectId> {}
 export interface IRoomModel extends Model<IRoomAttributes> {}
 
-export interface IUserDocument extends IUserAttributes, Document {}
+export interface IUserDocument
+    extends IUserAttributes,
+        Document<Types.ObjectId> {}
 export interface IUserModel extends Model<IUserDocument> {}

@@ -1,40 +1,51 @@
 import { API_URI } from "../constants";
-import { RoomResponse, Room } from "../interfaces";
+import { ICreateUserResponse, IRoom, IUser } from "../interfaces";
 
-const createRoom = async (): Promise<RoomResponse> => {
+const createRoom = async (): Promise<IRoom> => {
   const options = { method: "POST" };
-  const response = await fetch(`${API_URI}/room`, options);
-  const data = await response.json();
+  const response = await fetch(`${API_URI}/rooms/`, options);
+  const data: IRoom = await response.json();
   return data;
 };
 
-const addUserToRoom = async (
-  roomId: Room["_id"],
-  name: string
-): Promise<undefined> => {
-  const options = { method: "POST" };
-  const qs = `name=${name}`;
-  const response = await fetch(`${API_URI}/room/${roomId}/user?${qs}`, options);
-  const data = await response.json();
+const addUserToRoom = async (params: {
+  roomId: IRoom["_id"];
+  username: string;
+}): Promise<ICreateUserResponse> => {
+  const { roomId, username } = params;
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userName: username }),
+  };
+  const response = await fetch(`${API_URI}/rooms/${roomId}/user/join`, options);
+  const data: ICreateUserResponse = await response.json();
   return data;
 };
 
-const getRoom = async (roomId: Room["_id"]): Promise<RoomResponse> => {
+const getRoom = async (roomId: IRoom["_id"]): Promise<IRoom> => {
   const options = { method: "GET" };
-  const response = await fetch(`${API_URI}/room/${roomId}`, options);
-  const data = await response.json();
+  const response = await fetch(`${API_URI}/rooms/${roomId}`, options);
+  const data: IRoom = await response.json();
   return data;
 };
 
 const userChangeEstimate = async (
-  roomId: Room["_id"],
-  name: string,
+  roomId: IRoom["_id"],
+  userId: string,
   estimate: string
-): Promise<undefined> => {
+): Promise<IUser> => {
   const options = { method: "PUT" };
-  const qs = `name=${name}&estimate=${estimate}`;
+  const qs = `estimate=${estimate}`;
+  console.log(`🐶\n ${API_URI}/rooms/${roomId}/user/${userId}?${qs}`, {
+    options,
+    API_URI,
+    roomId,
+    userId,
+  });
+
   const response = await fetch(
-    `${API_URI}/room/${roomId}/user/estimate?${qs}`,
+    `${API_URI}/rooms/${roomId}/user/${userId}?${qs}`,
     options
   );
   const data = await response.json();
