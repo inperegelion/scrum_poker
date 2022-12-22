@@ -46,5 +46,23 @@ const userChangeEstimate = async (
   return data;
 };
 
-const api = { createRoom, addUserToRoom, getRoom, userChangeEstimate };
+const findUser = async (
+  roomId: IRoom["_id"],
+  userId: IUser["_id"],
+  name: IUser["name"]
+): Promise<IUser> => {
+  const options = { method: "GET" };
+  const qs = `?id=${userId}&name=${name}`;
+  const response = await fetch(`${API_URI}/rooms/${roomId}/user${qs}`, options);
+  const data: IUser = await response.json();
+  return data;
+};
+
+const api = {
+  createRoom,
+  addUserToRoom,
+  getRoom,
+  userChangeEstimate,
+  findUser,
+};
 export default api;

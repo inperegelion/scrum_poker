@@ -1,6 +1,6 @@
 /* eslint-disable  */
 import { useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { CopyUrlToClipboard } from "../../components/CopyUrlToClipboard";
 
 import { AppContext } from "../../contexts/userContext";
@@ -26,8 +26,7 @@ export const PokerPage = (): JSX.Element => {
     <div>
       <h1>Scrum Poker</h1>
       <p>
-        Room ID: <code>{roomId ?? params.roomId}</code>{" "}
-        <CopyUrlToClipboard />
+        Room ID: <code>{roomId ?? params.roomId}</code> <CopyUrlToClipboard />
       </p>
       {!username ? <EnterName /> : <Poker />}
     </div>
