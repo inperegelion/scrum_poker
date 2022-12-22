@@ -46,12 +46,12 @@ export const UserRow = ({
   const { name, estimate } = user;
   return (
     <li key={`user-${user.name}`}>
-      <span className="Username">
-        {name}
+      <span className="Username">{name}</span>
+      <span className="Separator">{" — "}</span>
+      <span className="Estimate">
+        {estimate}
         {isYou ? " (You)" : ""}
       </span>
-      <span className="Separator">{" — "}</span>
-      <span className="Estimate">{estimate}</span>
     </li>
   );
 };
