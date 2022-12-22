@@ -38,4 +38,12 @@ export class RoomsDB {
         );
         return user;
     }
+
+    public static async findUser(
+        id: string,
+        name: string
+    ): Promise<IUserDocument> {
+        const user = await UserModel.findOne({ _id: id, name }).exec();
+        return user;
+    }
 }

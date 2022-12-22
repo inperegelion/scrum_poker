@@ -73,11 +73,25 @@ const userChangeEstimate: UserChangeEstimateHandler = async (req, res) => {
         else res.json(user);
     }, res);
 };
+type FindUserHandler = RequestHandler<
+    null,
+    IUserDocument,
+    null,
+    { name: string; id: string }
+>;
+const findUser: FindUserHandler = async (req, res) => {
+    safeController(async () => {
+        const user = await RoomsDB.findUser(req.query.id, req.query.name);
+        if (!user) res.sendStatus(404);
+        else res.json(user);
+    }, res);
+};
 
 const roomControllers = {
     getRoom,
     createRoom,
     userJoinRoom,
     userChangeEstimate,
+    findUser,
 };
 export default roomControllers;

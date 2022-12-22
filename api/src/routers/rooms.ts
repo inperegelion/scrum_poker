@@ -7,5 +7,6 @@ roomsRouter.post('/', roomControllers.createRoom);
 roomsRouter.get('/:roomId', roomControllers.getRoom);
 roomsRouter.post('/:roomId/user/join', roomControllers.userJoinRoom);
 roomsRouter.put('/:roomId/user/:userId/', roomControllers.userChangeEstimate);
+roomsRouter.get('/:roomId/user', roomControllers.findUser);
 
 export default roomsRouter;
