@@ -1,16 +1,20 @@
 /* eslint-disable  */
-import { useContext, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { CopyUrlToClipboard } from "../../components/CopyUrlToClipboard";
 
-import { AppContext } from "../../contexts/userContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { EnterName } from "./EnterName";
 import { Poker } from "./Poker";
 
 export const PokerPage = (): JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const { roomId, setRoomId, username } = useContext(AppContext);
+
+  const [roomId, setRoomId] = useLocalStorage("roomId");
+  const [username] = useLocalStorage("username");
+
+  console.log("🐝", roomId, username);
 
   useEffect(() => {
     if (!roomId) {

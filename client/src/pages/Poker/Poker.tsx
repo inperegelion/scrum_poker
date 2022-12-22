@@ -1,11 +1,9 @@
-import { useContext } from "react";
-
-import { AppContext } from "../../contexts/userContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { EstimateCards } from "./EstimateCards";
 import { UsersList } from "./UserList";
 
 export const Poker = (): JSX.Element => {
-  const { username } = useContext(AppContext);
+  const [username] = useLocalStorage("username");
 
   return (
     <div>

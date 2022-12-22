@@ -1,21 +1,27 @@
 import { useMutation } from "@tanstack/react-query";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { AppContext } from "../../contexts/userContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "../../styles/NameInput.scss";
 
 export const EnterName = (): JSX.Element => {
-  const { setUserId, setUsername, roomId } = useContext(AppContext);
+  const navigate = useNavigate();
   const [usernameDraft, setUsernameDraft] = useState<string>("");
 
+  const [roomId] = useLocalStorage("roomId");
+  const [, setUserId] = useLocalStorage("userId");
+  const [, setUsername] = useLocalStorage("username");
+
   const { isLoading, isError, mutate } = useMutation(
-    () => api.addUserToRoom({ roomId, username: usernameDraft }),
+    () => api.addUserToRoom({ roomId: roomId ?? "", username: usernameDraft }),
     {
       async onSuccess(response) {
         setUserId(response?.createdUser._id);
         setUsername(response?.createdUser.name);
+        navigate(`/${roomId}`);
       },
     }
   );

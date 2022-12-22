@@ -1,20 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ESTIMATE_CARDS } from "../../constants";
-import { AppContext } from "../../contexts/userContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 import "../../styles/EstimateCard.scss";
 
 export const EstimateCards = (): JSX.Element => {
   const [userEstimate, setUserEstimate] = useState(ESTIMATE_CARDS[0]);
-  const { roomId, userId } = useContext(AppContext);
+  const [roomId] = useLocalStorage("roomId");
+  const [userId] = useLocalStorage("userId");
 
   const { mutate, isLoading, isError } = useMutation(
     (params: { estimate: string }) =>
-      api.userChangeEstimate(roomId, userId, params.estimate),
+      api.userChangeEstimate(roomId ?? "", userId ?? "", params.estimate),
     {
       onMutate: ({ estimate }) => {
         setUserEstimate(estimate);

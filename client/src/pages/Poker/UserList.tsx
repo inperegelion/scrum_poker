@@ -1,21 +1,21 @@
-import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import api from "../../api";
-import { AppContext } from "../../contexts/userContext";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { IUser } from "../../interfaces";
 
 import "../../styles/UserList.scss";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const UsersList = (): JSX.Element => {
-  const { userId, roomId } = useContext(AppContext);
+  const [roomId] = useLocalStorage("roomId");
+  const [userId] = useLocalStorage("userId");
 
   const {
     data: room,
     isLoading,
     isError,
-  } = useQuery(["room", roomId], () => api.getRoom(roomId), {
+  } = useQuery(["room", roomId], () => api.getRoom(roomId ?? ""), {
     refetchInterval: 2_000,
   });
 
