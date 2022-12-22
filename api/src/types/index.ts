@@ -20,3 +20,7 @@ export interface IUserDocument
     extends IUserAttributes,
         Document<Types.ObjectId> {}
 export interface IUserModel extends Model<IUserDocument> {}
+
+export interface IError {
+    message: Error['message'];
+}

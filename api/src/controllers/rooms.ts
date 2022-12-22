@@ -5,13 +5,27 @@ import {
     IRoomAttributes,
     IRoomCreationAttributes,
     IUserDocument,
+    IError,
 } from '../types';
 
-type GetRoomHandler = RequestHandler<{ roomId: string }, IRoomAttributes>;
+async function safeController(func: () => Promise<void> | void, res: any) {
+    try {
+        func();
+    } catch (error) {
+        res.status(500).json({ message: error?.message });
+    }
+}
+
+type GetRoomHandler = RequestHandler<
+    { roomId: string },
+    IRoomAttributes | IError
+>;
 const getRoom: GetRoomHandler = async (req, res) => {
-    const room = await RoomsDB.get(req.params.roomId);
-    if (!room) res.sendStatus(404);
-    else res.json(room);
+    safeController(async () => {
+        const room = await RoomsDB.get(req.params.roomId);
+        if (!room) res.sendStatus(404);
+        else res.json(room);
+    }, res);
 };
 
 type CreateRoomHandler = RequestHandler<
@@ -20,9 +34,11 @@ type CreateRoomHandler = RequestHandler<
     IRoomCreationAttributes
 >;
 const createRoom: CreateRoomHandler = async (req, res) => {
-    const room = await RoomsDB.create();
-    if (!room) res.sendStatus(404);
-    else res.json(room);
+    safeController(async () => {
+        const room = await RoomsDB.create();
+        if (!room) res.sendStatus(404);
+        else res.json(room);
+    }, res);
 };
 
 type userJoinRoomHandler = RequestHandler<
@@ -31,9 +47,14 @@ type userJoinRoomHandler = RequestHandler<
     { userName: string }
 >;
 const userJoinRoom: userJoinRoomHandler = async (req, res) => {
-    const room = await RoomsDB.joinUser(req.params.roomId, req.body.userName);
-    if (!room) res.sendStatus(404);
-    else res.json(room);
+    safeController(async () => {
+        const room = await RoomsDB.joinUser(
+            req.params.roomId,
+            req.body.userName
+        );
+        if (!room) res.sendStatus(404);
+        else res.json(room);
+    }, res);
 };
 
 type UserChangeEstimateHandler = RequestHandler<
@@ -43,12 +64,14 @@ type UserChangeEstimateHandler = RequestHandler<
     { estimate: number }
 >;
 const userChangeEstimate: UserChangeEstimateHandler = async (req, res) => {
-    const user = await RoomsDB.userChangeEstimate(
-        req.params.userId,
-        req.query.estimate
-    );
-    if (!user) res.sendStatus(404);
-    else res.json(user);
+    safeController(async () => {
+        const user = await RoomsDB.userChangeEstimate(
+            req.params.userId,
+            req.query.estimate
+        );
+        if (!user) res.sendStatus(404);
+        else res.json(user);
+    }, res);
 };
 
 const roomControllers = {
