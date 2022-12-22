@@ -3,7 +3,7 @@ import { IRoomDocument, IUserDocument } from '../types';
 
 const userSchema = new Schema<IUserDocument>({
     name: { type: String, required: true },
-    estimate: { type: Number, required: false },
+    estimate: { type: String, required: false },
 });
 
 const roomSchema = new Schema<IRoomDocument>(

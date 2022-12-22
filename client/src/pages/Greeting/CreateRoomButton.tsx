@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { AppContext } from "../../contexts/userContext";
+import "../../styles/Button.scss";
 
 export const CreateRoomButton = (): JSX.Element => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const CreateRoomButton = (): JSX.Element => {
 
   return (
     <>
-      <button onClick={() => mutate()} disabled={isLoading}>
+      <button className="Button" onClick={() => mutate()} disabled={isLoading}>
         Create a Room
       </button>
       <ErrorMessage isError={isError} />

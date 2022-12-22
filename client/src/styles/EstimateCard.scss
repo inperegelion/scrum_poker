@@ -1,0 +1,27 @@
+@import "variables.scss";
+
+.EstimateCardsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  box-sizing: border-box;
+  gap: $padding;
+}
+
+.EstimateCard {
+  display: flex;
+  justify-content: center;
+
+  width: 3em;
+
+  font-weight: 900;
+  font-size: $header-font-size;
+  line-height: $header-font-height;
+}
+
+.EstimateCard[disabled] {
+  background: $button-background-active;
+  color: $font-color-active;
+  outline: 1px solid $font-color-active;
+}

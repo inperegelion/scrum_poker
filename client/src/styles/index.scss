@@ -1,0 +1,54 @@
+@import "variables.scss";
+
+body {
+  margin: 0;
+  padding: $padding-box;
+
+  font-family: "Inter", sans-serif, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font-color;
+  background-color: $background;
+
+  font-size: $font-size;
+  line-height: $line-height;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+#root {
+  width: fit-content;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+h1 {
+  font-weight: 900;
+  font-size: $header-font-size;
+  line-height: $header-font-height;
+}
+
+button {
+  background: $button-background;
+  color: inherit;
+  padding: 1em;
+  border: none;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  border: $border;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.Button {
+  width: 100%;
+}

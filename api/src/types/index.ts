@@ -8,7 +8,7 @@ export interface IRoomCreationAttributes {}
 
 export interface IUserAttributes {
     name: string;
-    estimate: number;
+    estimate: string;
 }
 
 export interface IRoomDocument

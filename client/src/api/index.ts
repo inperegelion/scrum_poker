@@ -37,12 +37,6 @@ const userChangeEstimate = async (
 ): Promise<IUser> => {
   const options = { method: "PUT" };
   const qs = `estimate=${estimate}`;
-  console.log(`🐶\n ${API_URI}/rooms/${roomId}/user/${userId}?${qs}`, {
-    options,
-    API_URI,
-    roomId,
-    userId,
-  });
 
   const response = await fetch(
     `${API_URI}/rooms/${roomId}/user/${userId}?${qs}`,

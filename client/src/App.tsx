@@ -6,7 +6,7 @@ import { PokerPage } from "./pages/Poker/PokerPage";
 import { Greeting } from "./pages/Greeting";
 
 import { AppContext } from "./contexts/userContext";
-import "./App.css";
+import "./styles/App.scss";
 
 const queryClient = new QueryClient();
 

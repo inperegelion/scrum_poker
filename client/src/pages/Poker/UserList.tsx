@@ -6,6 +6,8 @@ import { AppContext } from "../../contexts/userContext";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { IUser } from "../../interfaces";
 
+import "../../styles/UserList.scss";
+
 export const UsersList = (): JSX.Element => {
   const { userId, roomId } = useContext(AppContext);
 
@@ -14,14 +16,14 @@ export const UsersList = (): JSX.Element => {
     isLoading,
     isError,
   } = useQuery(["room", roomId], () => api.getRoom(roomId), {
-    refetchInterval: 5_000,
+    refetchInterval: 2_000,
   });
 
   return (
     <>
       {isLoading ? <p>Loading Users Estimates...</p> : null}
       <ErrorMessage isError={isError} />
-      <ul>
+      <ul className="UserList">
         {room?.users?.map((user) => (
           <UserRow
             key={`user-${user._id}`}
@@ -44,8 +46,12 @@ export const UserRow = ({
   const { name, estimate } = user;
   return (
     <li key={`user-${user.name}`}>
-      {name} - {estimate}
-      {isYou ? "(You)" : ""}
+      <span className="Username">{name}</span>
+      <span className="Separator">{" — "}</span>
+      <span className="Estimate">
+        {estimate}
+        {isYou ? " (You)" : ""}
+      </span>
     </li>
   );
 };

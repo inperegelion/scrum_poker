@@ -4,6 +4,7 @@ import { ChangeEvent, useContext, useState } from "react";
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { AppContext } from "../../contexts/userContext";
+import "../../styles/NameInput.scss";
 
 export const EnterName = (): JSX.Element => {
   const { setUserId, setUsername, roomId } = useContext(AppContext);
@@ -32,6 +33,8 @@ export const EnterName = (): JSX.Element => {
       <p>Enter your name to play</p>
       <p>
         <input
+          className="NameInput"
+          name="name"
           type="text"
           placeholder="Nick"
           value={usernameDraft}
@@ -39,8 +42,12 @@ export const EnterName = (): JSX.Element => {
         />
       </p>
       <p>
-        <button onClick={() => submitUser()} disabled={isLoading}>
-          Submit Name
+        <button
+          className="Button"
+          onClick={() => submitUser()}
+          disabled={isLoading}
+        >
+          GO
         </button>
         <ErrorMessage isError={isError} />
       </p>
