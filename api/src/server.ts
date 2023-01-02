@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // routers
-app.use('/rooms', roomsRouter);
+app.use('/room', roomsRouter);
 
 app.listen(PORT);
 console.log(`👂 Listening on a port: ${PORT}`);

@@ -30,6 +30,13 @@ const getRoom = async (roomId: IRoom["_id"]): Promise<IRoom> => {
   return data;
 };
 
+const deleteRoom = async (roomId: IRoom["_id"]): Promise<IRoom> => {
+  const options = { method: "DELETE" };
+  const response = await fetch(`${API_URI}/rooms/${roomId}`, options);
+  const data: IRoom = await response.json();
+  return data;
+};
+
 const userChangeEstimate = async (
   roomId: IRoom["_id"],
   userId: string,
@@ -64,5 +71,6 @@ const api = {
   getRoom,
   userChangeEstimate,
   findUser,
+  deleteRoom,
 };
 export default api;

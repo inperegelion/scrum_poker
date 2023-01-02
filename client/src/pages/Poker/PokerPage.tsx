@@ -14,8 +14,6 @@ export const PokerPage = (): JSX.Element => {
   const [roomId, setRoomId] = useLocalStorage("roomId");
   const [username] = useLocalStorage("username");
 
-  console.log("🐝", roomId, username);
-
   useEffect(() => {
     if (!roomId) {
       if (params.roomId) {
@@ -24,7 +22,7 @@ export const PokerPage = (): JSX.Element => {
         navigate("/");
       }
     }
-  }, [roomId, params]);
+  }, [roomId]);
 
   return (
     <div>
