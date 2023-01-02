@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../../api";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "../../styles/Controls.scss";
@@ -18,7 +18,6 @@ export const Controls = (): JSX.Element => {
     if (roomId) {
       try {
         await api.deleteRoom(roomId);
-        removeRoomId();
         goHome();
       } catch (err) {
         console.error(err);
@@ -29,10 +28,13 @@ export const Controls = (): JSX.Element => {
   return (
     <>
       <hr />
+      Controls
       <div className="Controls">
         <button onClick={goHome}>Go Home</button>
-        <button onClick={forgetUsername}>Forget my UserName</button>
-        <button onClick={forgetUserid}>Forget my UserId</button>
+        <button>UserName: {username}</button>
+        <button onClick={forgetUsername}>Forget UserName</button>
+        <button>UserId: {userId}</button>
+        <button onClick={forgetUserid}>Forget UserId</button>
         <button onClick={deleteRoom} disabled={!roomId}>
           Delete Room
         </button>

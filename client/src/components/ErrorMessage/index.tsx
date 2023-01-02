@@ -1,14 +1,20 @@
+import "../../styles/ErrorMessage.scss";
+
 interface Props {
   isError: boolean;
+  message?: string;
 }
 
-export const ErrorMessage = ({ isError }: Props): JSX.Element | null => {
+export const ErrorMessage = ({
+  isError,
+  message,
+}: Props): JSX.Element | null => {
   if (!isError) return null;
   return (
-    <p style={{ color: "white", backgroundColor: "red" }}>
-      Something went wrong, can't commit an action.
+    <div className="ErrorMessage">
+      {message ?? "Something went wrong, can't commit an action."}
       <br />
       Open console to see the details.
-    </p>
+    </div>
   );
 };

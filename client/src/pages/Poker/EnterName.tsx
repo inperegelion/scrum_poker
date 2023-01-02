@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
@@ -8,20 +8,23 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "../../styles/NameInput.scss";
 
 export const EnterName = (): JSX.Element => {
-  const navigate = useNavigate();
-  const [usernameDraft, setUsernameDraft] = useState<string>("");
-
+  const params = useParams();
   const [roomId] = useLocalStorage("roomId");
   const [, setUserId] = useLocalStorage("userId");
-  const [, setUsername] = useLocalStorage("username");
+  const [username, setUsername] = useLocalStorage("username");
+  const [usernameDraft, setUsernameDraft] = useState<string>(username ?? "");
 
   const { isLoading, isError, mutate } = useMutation(
-    () => api.addUserToRoom({ roomId: roomId ?? "", username: usernameDraft }),
+    () =>
+      api.addUserToRoom({
+        roomId: roomId ?? params.roomId ?? "",
+        username: usernameDraft,
+      }),
     {
       async onSuccess(response) {
-        setUserId(response?.createdUser._id);
-        setUsername(response?.createdUser.name);
-        navigate(`/${roomId}`);
+        setUserId(response?._id);
+        setUsername(response?.name);
+        document.location.assign(`/${roomId}`); // todo: this is ugly
       },
     }
   );
@@ -42,12 +45,12 @@ export const EnterName = (): JSX.Element => {
           className="NameInput"
           name="name"
           type="text"
-          placeholder="Nick"
+          placeholder="Nickname"
           value={usernameDraft}
           onChange={onNameInputChange}
         />
       </p>
-      <p>
+      <div>
         <button
           className="Button"
           onClick={() => submitUser()}
@@ -56,7 +59,7 @@ export const EnterName = (): JSX.Element => {
           GO
         </button>
         <ErrorMessage isError={isError} />
-      </p>
+      </div>
     </div>
   );
 };

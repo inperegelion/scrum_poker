@@ -1,25 +1,32 @@
 /* eslint-disable  */
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { CopyUrlToClipboard } from "../../components/CopyUrlToClipboard";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
+import api from "../../api";
+import { CopyUrlToClipboard } from "../../components/CopyUrlToClipboard";
+import { ErrorMessage } from "../../components/ErrorMessage";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+
 import { EnterName } from "./EnterName";
 import { Poker } from "./Poker";
 
 export const PokerPage = (): JSX.Element => {
-  const navigate = useNavigate();
   const params = useParams();
+  const [isRoomExist, setIsRoomExist] = useState<boolean>(true);
 
   const [roomId, setRoomId] = useLocalStorage("roomId");
-  const [username] = useLocalStorage("username");
+  const [userId] = useLocalStorage("userId");
 
+  useQuery(["room", params.roomId], () => api.getRoom(params.roomId ?? ""), {
+    onError(err) {
+      if (err === 404) setIsRoomExist(false);
+    },
+  });
   useEffect(() => {
     if (!roomId) {
       if (params.roomId) {
         setRoomId(params.roomId);
-      } else {
-        navigate("/");
       }
     }
   }, [roomId]);
@@ -28,9 +35,10 @@ export const PokerPage = (): JSX.Element => {
     <div>
       <h1>Scrum Poker</h1>
       <p>
-        Room ID: <code>{roomId ?? params.roomId}</code> <CopyUrlToClipboard />
+        Room ID: <code>{params.roomId}</code> <CopyUrlToClipboard />
       </p>
-      {!username ? <EnterName /> : <Poker />}
+      <ErrorMessage isError={!isRoomExist} message="Room no longer exist" />
+      {!userId ? <EnterName /> : <Poker />}
     </div>
   );
 };

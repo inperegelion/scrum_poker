@@ -7,7 +7,3 @@ export interface IRoom extends Omit<IRoomDocument, "_id" | "users"> {
 export interface IUser extends Omit<IUserDocument, "_id"> {
   _id: string;
 }
-
-export interface ICreateUserResponse {
-  createdUser: IUser;
-}
