@@ -5,11 +5,11 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import { IUser } from "../../interfaces";
 
 import "../../styles/UserList.scss";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSessionStorage } from "../../hooks/useLocalStorage";
 
 export const UsersList = (): JSX.Element => {
-  const [roomId] = useLocalStorage("roomId");
-  const [userId] = useLocalStorage("userId");
+  const [roomId] = useSessionStorage("roomId");
+  const [userId] = useSessionStorage("userId");
 
   const {
     data: room,

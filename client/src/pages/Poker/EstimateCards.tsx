@@ -4,14 +4,14 @@ import { useState } from "react";
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ESTIMATE_CARDS } from "../../constants";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSessionStorage } from "../../hooks/useLocalStorage";
 
 import "../../styles/EstimateCard.scss";
 
 export const EstimateCards = (): JSX.Element => {
   const [userEstimate, setUserEstimate] = useState(ESTIMATE_CARDS[0]);
-  const [roomId] = useLocalStorage("roomId");
-  const [userId] = useLocalStorage("userId");
+  const [roomId] = useSessionStorage("roomId");
+  const [userId] = useSessionStorage("userId");
 
   const { mutate, isLoading, isError } = useMutation(
     (params: { estimate: string }) =>

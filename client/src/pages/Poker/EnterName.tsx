@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import {
+  useLocalStorage,
+  useSessionStorage,
+} from "../../hooks/useLocalStorage";
 import "../../styles/NameInput.scss";
 
 export const EnterName = (): JSX.Element => {
   const params = useParams();
-  const [roomId] = useLocalStorage("roomId");
-  const [, setUserId] = useLocalStorage("userId");
+  const [roomId] = useSessionStorage("roomId");
+  const [, setUserId] = useSessionStorage("userId");
   const [username, setUsername] = useLocalStorage("username");
   const [usernameDraft, setUsernameDraft] = useState<string>(username ?? "");
 

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import api from "../../api";
 import { CopyUrlToClipboard } from "../../components/CopyUrlToClipboard";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSessionStorage } from "../../hooks/useLocalStorage";
 
 import { EnterName } from "./EnterName";
 import { Poker } from "./Poker";
@@ -15,8 +15,8 @@ export const PokerPage = (): JSX.Element => {
   const params = useParams();
   const [isRoomExist, setIsRoomExist] = useState<boolean>(true);
 
-  const [roomId, setRoomId] = useLocalStorage("roomId");
-  const [userId] = useLocalStorage("userId");
+  const [roomId, setRoomId] = useSessionStorage("roomId");
+  const [userId] = useSessionStorage("userId");
 
   useQuery(["room", params.roomId], () => api.getRoom(params.roomId ?? ""), {
     onError(err) {
@@ -30,6 +30,8 @@ export const PokerPage = (): JSX.Element => {
       }
     }
   }, [roomId]);
+
+  console.log("PokerPage", { roomId, userId });
 
   return (
     <div>

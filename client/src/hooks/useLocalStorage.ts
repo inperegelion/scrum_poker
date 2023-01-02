@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export type LocalStorageKeys = "roomId" | "userId" | "username";
+export type StorageKeys = "roomId" | "userId" | "username";
 
 export const useLocalStorage = (
-  storageKey: LocalStorageKeys
+  storageKey: StorageKeys
 ): [
   string | null, //
   (arg: string) => void,
@@ -24,26 +24,24 @@ export const useLocalStorage = (
   return [state, setValue, removeValue];
 };
 
-// export const useStorage = (
-//   storageKey: LocalStorageKeys,
-//   type: "local" | "session" = "local"
-// ): [
-//   string | null, //
-//   (arg: string) => void,
-//   () => void
-// ] => {
-//   const storage = { local: localStorage, session: sessionStorage };
-//   const value = storage[type].getItem(storageKey);
-//   const [state, setState] = useState<string | null>(value);
+export const useSessionStorage = (
+  storageKey: StorageKeys
+): [
+  string | null, //
+  (arg: string) => void,
+  () => void
+] => {
+  const value = sessionStorage.getItem(storageKey);
+  const [state, setState] = useState<string | null>(value);
 
-//   const setValue = (newValue: string) => {
-//     storage[type].setItem(storageKey, newValue);
-//     setState(newValue);
-//   };
-//   const removeValue = () => {
-//     storage[type].removeItem(storageKey);
-//     setState(null);
-//   };
+  const setValue = (newValue: string) => {
+    sessionStorage.setItem(storageKey, newValue);
+    setState(newValue);
+  };
+  const removeValue = () => {
+    sessionStorage.removeItem(storageKey);
+    setState(null);
+  };
 
-//   return [state, setValue, removeValue];
-// };
+  return [state, setValue, removeValue];
+};
