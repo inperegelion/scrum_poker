@@ -31,8 +31,6 @@ export const PokerPage = (): JSX.Element => {
     }
   }, [roomId]);
 
-  console.log("PokerPage", { roomId, userId });
-
   return (
     <div>
       <h1>Scrum Poker</h1>

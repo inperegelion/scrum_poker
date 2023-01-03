@@ -1,5 +1,7 @@
-import { API_URI } from "../constants";
 import { IRoom, IUser } from "../interfaces";
+import { getApiUrlFromLocation } from "../utils/getApiUri";
+
+const API_URI = getApiUrlFromLocation(window.location);
 
 const createRoom = async (): Promise<IRoom> => {
   const options = { method: "POST" };
@@ -57,24 +59,11 @@ const userChangeEstimate = async (
   return data;
 };
 
-const findUser = async (
-  roomId: IRoom["_id"],
-  userId: IUser["_id"],
-  name: IUser["name"]
-): Promise<IUser> => {
-  const options = { method: "GET" };
-  const qs = `?id=${userId}&name=${name}`;
-  const response = await fetch(`${API_URI}/room/${roomId}/user${qs}`, options);
-  const data: IUser = await response.json();
-  return data;
-};
-
 const api = {
   createRoom,
   addUserToRoom,
   getRoom,
   userChangeEstimate,
-  findUser,
   deleteRoom,
 };
 export default api;
