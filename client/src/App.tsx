@@ -5,7 +5,6 @@ import { PokerPage } from "./pages/Poker/PokerPage";
 import { Greeting } from "./pages/Greeting";
 
 import "./styles/App.scss";
-import { Controls } from "./pages/Controlls";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +18,7 @@ function App() {
             <Route path="/:roomId" element={<PokerPage />} />
           </Routes>
         </BrowserRouter>
-        <Controls />
+        {/* <Controls /> */}
       </div>
     </QueryClientProvider>
   );
