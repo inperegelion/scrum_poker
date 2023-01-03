@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
@@ -11,6 +11,7 @@ import {
 import "../../styles/NameInput.scss";
 
 export const EnterName = (): JSX.Element => {
+  const navigate = useNavigate();
   const params = useParams();
   const [roomId] = useSessionStorage("roomId");
   const [, setUserId] = useSessionStorage("userId");
@@ -27,7 +28,7 @@ export const EnterName = (): JSX.Element => {
       async onSuccess(response) {
         setUserId(response?._id);
         setUsername(response?.name);
-        document.location.assign(`/${roomId}`); // todo: this is ugly
+        navigate(0);
       },
     }
   );
