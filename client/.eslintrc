@@ -1,6 +1,6 @@
 {
   "rules": {
-    "no-restricted-globals": ["warn", "location"],
+    "no-restricted-globals": 0,
     "react-hooks/exhaustive-deps": 0
   }
 }

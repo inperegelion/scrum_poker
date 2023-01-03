@@ -1,16 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { useContext } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import api from "../../api";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { AppContext } from "../../contexts/userContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import "../../styles/Button.scss";
 
 export const CreateRoomButton = (): JSX.Element => {
   const navigate = useNavigate();
-  const { setRoomId } = useContext(AppContext);
+  const [, setRoomId] = useLocalStorage("roomId");
 
   const { isLoading, isError, mutate } = useMutation(api.createRoom, {
     onSuccess(room) {

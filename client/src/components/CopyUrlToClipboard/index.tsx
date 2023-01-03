@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import copy from "copy-to-clipboard";
 
+import "../../styles/Button.scss";
+
 export const CopyUrlToClipboard = (): JSX.Element => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
@@ -16,7 +18,10 @@ export const CopyUrlToClipboard = (): JSX.Element => {
   };
 
   return (
-    <button onClick={handler}>
+    <button
+      onClick={handler}
+      // className="TinnyButton"
+    >
       {isClicked ? "Copied!" : "Copy Invite Link"}
     </button>
   );

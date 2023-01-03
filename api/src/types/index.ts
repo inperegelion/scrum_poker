@@ -4,8 +4,6 @@ export interface IRoomAttributes {
     users: IUserDocument[];
 }
 
-export interface IRoomCreationAttributes {}
-
 export interface IUserAttributes {
     name: string;
     estimate: string;
