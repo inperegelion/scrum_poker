@@ -1,15 +1,14 @@
 import express from 'express';
+import cors from 'cors';
 
 import { connectMongo } from './db';
 
 import roomsRouter from './routers/rooms';
-import path from 'path';
-import cors from 'cors';
+import helloRouter from './routers/hello';
 
-const envFileLocation = path.relative(process.cwd(), '../.env');
-require('dotenv').config({ path: envFileLocation });
+require('dotenv').config();
 
-const PORT = process.env.API_RUNNING_PORT ?? 3000;
+const PORT = process.env.API_RUNNING_PORT ?? 3001;
 const app = express();
 
 connectMongo(process.env.MONGO_CONNECTION_STRING);
@@ -20,6 +19,7 @@ app.use(express.json());
 
 // routers
 app.use('/room', roomsRouter);
+app.use('/', helloRouter);
 
 app.listen(PORT);
 console.log(`👂 Listening on a port: ${PORT}`);
